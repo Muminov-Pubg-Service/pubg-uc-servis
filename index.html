@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUBG UC Service by Muminov</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="icon" href="https://seeklogo.com/images/U/uc-logo-F2EF6F6AA7-seeklogo.com.png" type="image/png">
+    <meta name="description" content="PUBG UC Service by Muminov - Fast, Secure & Reliable UC Buying Service.">
+    <meta name="keywords" content="PUBG, UC Service, Muminov, UC Buying, PUBG UC Service">
+
+    <style>
+        .payment-methods {
+            display: none;
+            margin-top: 20px;
+        }
+        .payment-methods img {
+            width: 100px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        const users = {
+            '12345': 'Ali',
+            '67890': 'Vali',
+            '11223': 'Hasan'
+        };
+
+        let currentPackage = "";
+        let currentAmount = 0;
+
+        function buyNow(package, amount) {
+            currentPackage = package;
+            currentAmount = amount;
+
+            const userId = prompt('Iltimos, PUBG ID raqamingizni kiriting:');
+
+            if (userId === null || userId.trim() === "") {
+                alert('ID raqamini kiritmadingiz!');
+                return;
+            }
+
+            if (users[userId]) {
+                const userName = users[userId];
+                document.getElementById('paymentInfo').innerHTML = `
+                    ✅ ID topildi: ${userName}<br>
+                    📦 Paket: ${package}<br>
+                    💵 To'lov qilish: ${amount.toLocaleString()} so'm
+                    <br><button onclick="showPaymentMethods()" class="mt-4 px-4 py-2 bg-green-500 text-white rounded">To'lov qilish</button>
+                `;
+            } else {
+                alert('❌ Bunday ID topilmadi! Iltimos, tekshirib qayta kiriting.');
+            }
+        }
+
+        function showPaymentMethods() {
+            document.querySelector('.payment-methods').style.display = 'block';
+        }
+
+        function goToPayment(app) {
+            let paymentUrl = '';
+
+            if (app === 'click') {
+                paymentUrl = `https://my.click.uz/services/pay?receiver=9860020127573127&amount=${currentAmount}`;
+            } else if (app === 'payme') {
+                paymentUrl = `https://payme.uz/transfer/9860020127573127?amount=${currentAmount}`;
+            } else if (app === 'alif') {
+                paymentUrl = `https://alifpay.uz/payment?card=9860020127573127&amount=${currentAmount}`;
+            }
+
+            window.open(paymentUrl, '_blank');
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="container mx-auto p-4">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-yellow-400">PUBG UC Service by Muminov</h1>
+            <p class="text-gray-300">Fast, Secure & Reliable UC Buying Service</p>
+            <img src="https://cdn.wallpapersafari.com/83/0/TPmqud.jpg" alt="PUBG Image" class="mx-auto mt-4 rounded-lg shadow-lg w-80">
+        </header>
+
+        <!-- UC Packages Section -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-gray-800 p-4 rounded-lg shadow-lg text-center">
+                <h2 class="text-xl font-bold">60 UC</h2>
+                <p class="mt-2 text-gray-400">Narxi: 12,000 so'm</p>
+                <button onclick="buyNow('60 UC', 12000)" class="mt-4 px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500">Buy Now</button>
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-lg shadow-lg text-center">
+                <h2 class="text-xl font-bold">325 UC</h2>
+                <p class="mt-2 text-gray-400">Narxi: 57,000 so'm</p>
+                <button onclick="buyNow('325 UC', 57000)" class="mt-4 px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500">Buy Now</button>
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-lg shadow-lg text-center">
+                <h2 class="text-xl font-bold">660 UC</h2>
+                <p class="mt-2 text-gray-400">Narxi: 110,000 so'm</p>
+                <button onclick="buyNow('660 UC', 110000)" class="mt-4 px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500">Buy Now</button>
+            </div>
+        </section>
+
+        <!-- Payment Info -->
+        <div id="paymentInfo" class="text-center mt-6 text-lg"></div>
+
+        <!-- Payment Methods -->
+        <div class="payment-methods text-center">
+            <h3 class="text-xl text-yellow-400">Qaysi kartadan to'lov qilishni tanlang:</h3>
+            <div>
+                <img src="https://click.uz/click/images/logo2.svg" alt="Click" onclick="goToPayment('click')">
+                <img src="https://payme.uz/img/logo.svg" alt="PayMe" onclick="goToPayment('payme')">
+                <img src="https://alif.tj/img/alif-logo.svg" alt="Alif Mobi" onclick="goToPayment('alif')">
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 text-gray-500">
+            <p>&copy; 2025 PUBG UC Service by Muminov. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
